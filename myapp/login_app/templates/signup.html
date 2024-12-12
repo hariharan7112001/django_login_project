@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+            <div class="form-group">
+                <label for="id_user_name">Username:</label>
+                {{ form.user_name }}
+                {% if form.user_name.errors %}
+                    <div class="error">{{ form.user_name.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_email">Email:</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <div class="error">{{ form.email.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_password_one">Password:</label>
+                {{ form.password_one }}
+                {% if form.password_one.errors %}
+                    <div class="error">{{ form.password_one.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_password_two">Confirm Password:</label>
+                {{ form.password_two }}
+                {% if form.password_two.errors %}
+                    <div class="error">{{ form.password_two.errors }}</div>
+                {% endif %}
+            </div>
+            <button type="submit">Sign Up</button>
+            <div class="navigation">
+                <p>Already have an account?</p>
+                <a href="{% url 'login' %}" class="login-button">Login</a>
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>
